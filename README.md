@@ -23,6 +23,13 @@ Things you may want to cover:
 
 * ...
 
+## RESTful Routes for Databases (no views)
+- index
+- show
+- create
+- update
+- destroy
+
 ## Wildlife Tracker Challenge
 The Forest Service is considering a proposal to place in conservancy a forest of virgin Douglas fir just outside of Portland, Oregon. Before they give the go-ahead, they need to do an environmental impact study. They've asked you to build an API the rangers can use to report wildlife sightings.
 
