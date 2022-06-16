@@ -49,16 +49,26 @@ $  rails g resource Animal name:string latin:string kingdom:string
 $  rails db:migrate
 $  rails c
 ```
-Created some models for the database:
+
+
+Story: As the consumer of the API I can see all the animals in the database.
+Hint: Make a few animals using Rails Console
+
+Created some animals for the database:
 ```Ruby
 Animal.create(name:"Lion", latin:"Panthera leo", kingdom:"Mammal")
 Animal.create(name:"Capybara", latin:"Hydrochoerus hydrochaeris", kingdom:"Mammal")
 Animal.create(name:"Black Widow Spider", latin:"Latrodectus", kingdom:"Arachnida")
 ```
 
-Story: As the consumer of the API I can see all the animals in the database.
-Hint: Make a few animals using Rails Console
-
+- Work on Index RESTful route:
+```Ruby
+    def index
+        animals = Animal.all
+        render json: animals
+    end
+```
+![index](screenshots/indeximg.png)
 Story: As the consumer of the API I can update an animal in the database.
 
 Story: As the consumer of the API I can destroy an animal in the database.
