@@ -17,6 +17,16 @@ class AnimalsController < ApplicationController
        end
     end
 
+    def destroy
+        animals = Animal.find(params[:id])
+        animals.destroy
+        if animals.valid?
+         render json: animals
+       else
+        render json: animals.errors
+       end
+    end
+
     private
     def animal_params
         params.require(:animal).permit(:name, :latin, :kingdom)
