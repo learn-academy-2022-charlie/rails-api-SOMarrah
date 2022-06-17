@@ -200,6 +200,35 @@ Hint: Datetime is written in Rails as “year-month-day hr:min:sec" (“2022-01-
 $ rails g resource Sighting date:datetime lat:decimal long:decimal
 ```
 
+```Ruby
+class Animal < ApplicationRecord
+    has_many :sightings
+end
+
+class Sighting < ApplicationRecord
+    belongs_to :animal
+end
+```
+```
+$ rails db:migrate
+```
+
+- Forgot to add animal_id: integer for the foreign key association!
+- Have to generate another migration to add a column
+```Ruby
+class AddAnimalIdToSighting < ActiveRecord::Migration[7.0]
+  def change
+    add_column :sightings, :animal_id, :integer
+  end
+end
+```
+```
+$ rails db:migrate
+```
+
+- To create a sighting of an animal: 
+
+
 Story: As the consumer of the API I can update an animal sighting in the database.
 
 Story: As the consumer of the API I can destroy an animal sighting in the database.
