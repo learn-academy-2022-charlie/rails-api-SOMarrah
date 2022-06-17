@@ -95,6 +95,14 @@ def update
        end
     end
 ```
+- Make sure to use strong params:
+```Ruby
+ private
+    def animal_params
+        params.require(:animal).permit(:name, :latin, :kingdom)
+    end
+```
+- Take note not to put new methods under private or they will not work.
 
 - Update is a put/patch HTTP request, with the .update Controller.
 - The terminal (rails routes -E) says my update uri is: /animals/:id(.:format)
@@ -127,6 +135,28 @@ Format below:
 - Changed the values back to normal after.
 
 Story: As the consumer of the API I can destroy an animal in the database.
+
+- HTTP Verb - DELETE URI - /animals/:id(.:format) Method - animals#destroy
+- Update the controller with the destroy method:
+```Ruby
+def destroy
+        animals = Animal.find(params[:id])
+        animals.destroy
+        if animals.valid?
+         render json: animals
+       else
+        render json: animals.errors
+       end
+    end
+```
+- Make sure to switch the verb in postman to delete
+- make sure to switch the body back to none (not sure if that is required)
+
+![destroy](screenshots/destroyimg.png)
+![isdestroyed](screenshots/isdestroyed.png)
+
+
+
 
 Story: As the consumer of the API I can create a new animal in the database.
 
