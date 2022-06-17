@@ -190,6 +190,16 @@ Story: As the consumer of the API I can create a sighting of an animal with date
 Hint: An animal has_many sightings. (rails g resource Sighting animal_id:integer ...)
 Hint: Datetime is written in Rails as “year-month-day hr:min:sec" (“2022-01-28 05:40:30")
 
+- Create a new table(generate resource) for Sighting. it has date(datetime): "2022-01-28-05:40:30", lat(decimal):-90 - +90, long(decimal): -180 - 180. lat and long have a maximum of 8 decimal places for precision [stackoverflow decimals](https://stackoverflow.com/questions/15965166/what-are-the-lengths-of-location-coordinates-latitude-and-longitude#:~:text=The%20valid%20range%20of%20latitude,of%20the%20Prime%20Meridian%2C%20respectively.)
+
+- the Sighting model is associated with the Animal model. (Sighting belongs_to Animal; Animal has_many Sightings)
+
+- Use foreign keys to associate the Sighting model. animal_id: integer
+
+```
+$ rails g resource Sighting date:datetime lat:decimal long:decimal
+```
+
 Story: As the consumer of the API I can update an animal sighting in the database.
 
 Story: As the consumer of the API I can destroy an animal sighting in the database.
