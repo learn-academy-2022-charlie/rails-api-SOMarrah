@@ -69,7 +69,38 @@ Animal.create(name:"Black Widow Spider", latin:"Latrodectus", kingdom:"Arachnida
     end
 ```
 ![index](screenshots/indeximg.png)
+
+- Work on show RESTful route:
+
+```Ruby
+    def show
+        animal = Animal.find(params[:id])
+        render json: animal
+    end
+```
+![show](screenshots/showimg.png)
+
 Story: As the consumer of the API I can update an animal in the database.
+
+- Update is a put/patch HTTP request, with the .update Controller.
+- The terminal (rails routes -E) says my update uri is: /animals/:id(.:format)
+- Make sure to use the PATCH or PUT verb
+- make sure to use the 'body' tab => raw button => format -JSON for text editor to format the update and pass the specific values for params.
+Format below:
+```json
+{
+    "name": "",
+    "latin": "",
+    "kingdom": "",
+}
+```
+- Got error 422 for Invalid Authenticity Token (GOOD - have to allow it!)
+- Go to application controller and put:
+```Ruby
+    skip_before_action :verify_authenticity_token
+```
+
+
 
 Story: As the consumer of the API I can destroy an animal in the database.
 
