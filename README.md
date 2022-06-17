@@ -86,12 +86,12 @@ Story: As the consumer of the API I can update an animal in the database.
 
 ```Ruby
 def update
-        animals = Animal.find(params[:id])
-        animals.update(animal_params)
-       if animals.valid?
-         render json: animals
+        animal = Animal.find(params[:id])
+        animal.update(animal_params)
+       if animal.valid?
+         render json: animal
        else
-        render json: animals.errors
+        render json: animal.errors
        end
     end
 ```
@@ -140,12 +140,12 @@ Story: As the consumer of the API I can destroy an animal in the database.
 - Update the controller with the destroy method:
 ```Ruby
 def destroy
-        animals = Animal.find(params[:id])
-        animals.destroy
-        if animals.valid?
-         render json: animals
+        animal = Animal.find(params[:id])
+        animal.destroy
+        if animal.valid?
+         render json: animal
        else
-        render json: animals.errors
+        render json: animal.errors
        end
     end
 ```
@@ -159,6 +159,32 @@ def destroy
 
 
 Story: As the consumer of the API I can create a new animal in the database.
+
+- HTTP verb - POST URI - /animals(.:format) Controller Method - animals#create
+- Note the 'new' method is not needed because it is a view request
+- Update the controller with the create method (already have strong params impletemented):
+```Ruby
+def create 
+        animal = Animal.create(animal_params)
+        if animal.valid?
+            render json: animal
+        else
+           render json: animal.errors
+        end
+    end
+```
+- Make sure to switch the verb in postman to POST
+- make sure to enable the body and fill out the parameters in JSON:
+```Json
+{
+    "name": "Lion",
+    "latin": "Panthera Leo",
+    "kingdom": "Mammal"
+}
+```
+
+![create](screenshots/createimg.png)
+
 
 Story: As the consumer of the API I can create a sighting of an animal with date (use the datetime datatype), a latitude, and a longitude.
 Hint: An animal has_many sightings. (rails g resource Sighting animal_id:integer ...)
