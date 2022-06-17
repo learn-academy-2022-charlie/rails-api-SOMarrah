@@ -82,6 +82,20 @@ Animal.create(name:"Black Widow Spider", latin:"Latrodectus", kingdom:"Arachnida
 
 Story: As the consumer of the API I can update an animal in the database.
 
+- Update the controller with the update method:
+
+```Ruby
+def update
+        animals = Animal.find(params[:id])
+        animals.update(animal_params)
+       if animals.valid?
+         render json: animals
+       else
+        render json: animals.errors
+       end
+    end
+```
+
 - Update is a put/patch HTTP request, with the .update Controller.
 - The terminal (rails routes -E) says my update uri is: /animals/:id(.:format)
 - Make sure to use the PATCH or PUT verb
@@ -99,8 +113,18 @@ Format below:
 ```Ruby
     skip_before_action :verify_authenticity_token
 ```
+- Edit primary key 1- URI: localhost:3000/animals/1
+- The put request in the body:
+```Ruby
+{
+    "name": "Leo",
+    "latin": "Lion",
+    "kingdom": "Mammals"
+}
+```
+![update](screenshots/updateimg.png)
 
-
+- Changed the values back to normal after.
 
 Story: As the consumer of the API I can destroy an animal in the database.
 
